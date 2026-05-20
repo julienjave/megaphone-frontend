@@ -91,25 +91,29 @@ button:hover {
   border-top: 1px solid #cccccc;
 }
 
-.post-body,
-.post-meta {
-  margin: 0;
-}
-
 .post-body {
   font-size: 1.3em;
   line-height: 1.5;
   word-break: break-word;
+  margin: 0;
 }
 
 .post-meta {
   margin-top: 6px;
   color: #8b8484;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post-meta p {
+  margin: 0 12px;
 }
 
 .delete-button {
     cursor: pointer;
-    margin-top: 32px;
+    margin-left: 50px;
 }
 
 @media (max-width: 560px) {
