@@ -47,7 +47,7 @@ const addPostsToPage = (posts) => {
             numberOfUnits = Math.round(numberOfUnits / 60)
         }
 
-        postBody.innerText = post.body
+        postBody.innerText = `>_ ${post.body}`
         usernameLabel.innerText = post.author
         timeLabel.innerText = `posted ${numberOfUnits} ${unitOfTime}${numberOfUnits !== 1 ? "s" : ""} ago`
 
