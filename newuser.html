@@ -9,16 +9,24 @@
     <script src="create-user.js" defer></script>
 </head>
 <body>
-    <h1>Create New User</h1>
-    <form id="new-user-form">
-        <label for="new-username">Username:</label>
-        <input type="text" id="new-username" name="username" required>
+    <h1>
+        <img src="Printed-Circuit.png" alt="">
+        <span class="title">Holofeed</span>
+    </h1>
+    <div class="form-card">
+        <h1>Create New User</h1>
+        <form id="new-user-form" class="form">
+            <label for="new-username">Username:</label>
+            <input type="text" id="new-username" name="username" required>
 
-        <label for="new-password">Password:</label>
-        <input type="password" id="new-password" name="password" required>
+            <label for="new-password">Password:</label>
+            <input type="password" id="new-password" name="password" required>
 
-        <button type="submit">Create account</button>
-    </form>
+            <button type="submit">
+                <span>Create account</span>
+            </button>
+        </form>
+    </div>
     <h3 id="status-message">...</h3>
 </body>
 </html>

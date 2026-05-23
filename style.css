@@ -8,6 +8,9 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 0 auto;
   min-height: 100vh;
   max-width: 720px;
@@ -31,11 +34,22 @@ h1 img {
   height: 48px;
 }
 
-#new-post-form {
+.form {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 12px;
   margin-bottom: 24px;
+  width: 90%;
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #4933b7;
+  background-color: #4933b72f;
+  width: 400px;
 }
 
 label {
@@ -102,7 +116,7 @@ button::after {
   left: 2px;
   right: 2px;
   bottom: 2px;
-  background-color: #8662ff;
+  background-color: #4933b7;
   clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
   
   /* Sits between the purple border (z-index -1) and the button text (z-index default) */
@@ -110,11 +124,11 @@ button::after {
 }
 
 button:hover {
-  color: #8662ff;
+  color: #4933b7;
 }
 
 button:hover::before {
-  background-color: #8662ff;
+  background-color: #4933b7;
 }
 
 button:hover::after {
@@ -157,8 +171,9 @@ button:hover {
 }
 
 .post {
-  padding: 16px 0;
+  padding: 16px 10px;
   border-top: 1px solid #4933b7;
+  background-color: #4933b72f;
 }
 
 .post-body {
