@@ -2,26 +2,60 @@ const form = document.getElementById("new-post-form")
 // const baseURL = `http://localhost:3000`
 const baseURL = `https://megaphone-server-1.onrender.com`
 
-const getPosts = async () => {
+const getPosts = async (username=null) => {
     const response = await fetch(`${baseURL}/posts`)
-    const posts = await response.json()
+    let posts = await response.json()
 
+    if (username) {
+        posts = posts.filter(post => {
+            return post.author === username
+        })
+        addPostWithUserInfo(posts)
+        return posts
+    }
+    const allPosts = document.getElementById("all-posts")
+    allPosts.innerHTML = ""
     addPostsToPage(posts)
     return posts
 }
 
+const addPostWithUserInfo = (posts) => {
+    const allPosts = document.getElementById("all-posts")
+
+    const cancelButton = document.createElement("div")
+    cancelButton.className = "cancel-button"
+    const cancelButtonLabel = document.createElement("span")
+    cancelButtonLabel.innerText = "< Back"
+    cancelButton.appendChild(cancelButtonLabel)
+
+    cancelButton.addEventListener('click', () => {
+        getPosts()
+    })
+
+    const userDescription = document.createElement("p")
+    userDescription.innerText = `Posts by ${posts[0].author}: ${posts.length}`
+
+    allPosts.innerHTML = ""
+    allPosts.appendChild(userDescription)
+    allPosts.appendChild(cancelButton)
+    addPostsToPage(posts)
+}
+
 const addPostsToPage = (posts) => {
     const allPosts = document.getElementById("all-posts")
-    allPosts.innerHTML = ""
 
     posts.reverse().forEach(post => {
         const newListItem = document.createElement("li")
         newListItem.className = "post"
         const postBody = document.createElement("p")
         postBody.className = "post-body"
+        postBody.innerText = `>_ ${post.body}`
         const postMeta = document.createElement("div")
         postMeta.className = "post-meta"
-        const usernameLabel = document.createElement("p")
+        const usernameLabel = document.createElement("a")
+        usernameLabel.href = "#"
+        usernameLabel.innerText = post.author
+        usernameLabel.addEventListener('click', usernameClickEvent)
         const timeLabel = document.createElement("p")
         const deleteButton = document.createElement("a")
         deleteButton.className = "delete-button"
@@ -47,8 +81,6 @@ const addPostsToPage = (posts) => {
             numberOfUnits = Math.round(numberOfUnits / 60)
         }
 
-        postBody.innerText = `>_ ${post.body}`
-        usernameLabel.innerText = post.author
         timeLabel.innerText = `posted ${numberOfUnits} ${unitOfTime}${numberOfUnits !== 1 ? "s" : ""} ago`
 
         postMeta.appendChild(usernameLabel)
@@ -72,6 +104,10 @@ const addPostsToPage = (posts) => {
 }
 
 getPosts()
+
+const usernameClickEvent = (event) => {
+    getPosts(event.target.innerText)
+}
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault()
